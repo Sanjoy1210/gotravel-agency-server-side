@@ -31,6 +31,7 @@ async function run() {
     const planCollection = database.collection('plans');
     const reviewCollection = database.collection('reviews');
     const bookingCollection = database.collection('booking');
+    const hotelCollection = database.collection('hotels');
 
     // POST API for plans
     app.post('/addplans', async (req, res) => {
@@ -102,6 +103,13 @@ async function run() {
       console.log(result);
       res.json(result);
     });
+
+    // get hotel api
+    app.get('/hotels', async (req, res) => {
+      const cursor = hotelCollection.find({});
+      const result = await cursor.toArray();
+      res.send(result);
+    })
   }
   finally {
     // await client.close();
